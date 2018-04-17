@@ -1,0 +1,228 @@
+倒序输出问题
+#include<iostream>
+using namespace std;
+int main()
+{
+	char *allletters = new char[60000];
+	int m = 0, s, t = 0;
+	char a;
+	while ((a = cin.get()) != '\n'&&t <= 50000)
+	{
+		allletters[t] = a;
+		t++;
+		cout << t;
+	}
+	t--;
+	if (t == 50000)
+		t--;
+	while (t >= 0)
+	{
+		if (allletters[t] != ' ')
+		{
+			s = t;
+			m++;
+			t--;
+			while ((allletters[t] != ' ') )
+			{
+				m++;
+				t--;
+			}
+			for (int w = 0; w <= m - 1; w++)
+			{
+				cout << allletters[s - m + w + 1];
+			}
+			m = 0;
+			if (t != -1)
+				cout << " ";
+		}
+		else
+			t--;
+
+	}
+	return 0;
+}
+
+
+
+
+倒序输出  错误理解
+#include<iostream>
+using namespace std;
+int main()
+{
+	const int size =50000;
+	char *c = new char[size];
+	int i = 0;
+	while (getchar() == '\n'&&getchar() != '.')
+	{
+		c[i] = getchar();
+	}
+	for (int j = i; j >= 1; j--)
+	{
+		if (c[j] == ' '&&c[j - 1] == ' ')
+			continue;
+		else
+			cout << c[j];
+	}
+	if (c[0] != ' ')
+	{
+		cout << c[0] << '.' << endl;
+	}
+	else
+	{
+		cout << '.' << endl;
+	}
+	delete[]c;
+	return 0;
+}
+
+排队买票问题错误67%
+#include<iostream>
+using namespace std;
+int a(int n)
+{
+	int s = 1;
+	for (int i = 1; i <= n; i++)
+	{
+		s *= i;
+	}
+	return s;
+}
+int main()
+{
+	int m, n, k, i;
+	cin>>m>>n>>k;
+	int   p = 1, q1 = k - 1, t1 = n + 1;//源代码为q=m-n;q1=m-n-1;为啥不一样的
+	cout<<(a(m)/(a(k)*a(n))-a(m)/(a(k)*a(t1)))*a(n)*a(k)<<endl;//只把原来的变量换成自己输入的变量，就错误67%
+	return 0;
+}
+删除重复元素问题 数据结构表达
+#include <iostream>
+using namespace std;
+template<class T>
+struct Node
+{
+	T data;
+	struct Node<T>* next;
+};
+template <class T>
+class LinkList
+{
+public:
+	LinkList() { front = new Node<T>; front->next = NULL; }//无参构造函数
+	LinkList(T a[], int n); //有参构造函数，使用含有n个元素的数组a初始化单链表
+	~LinkList();	//析构
+	void PrintList(); ? ?//打印
+	void decide();
+	//int GetLength(); ? ? //获取长度
+	//Node<T>* Get(int i); ? ?//查找
+	//int Locate(T x); ? ? ?//定位
+	//void Insert(int i, T x); ? ? //插入
+	//T Delete(int i); ? ? //删除
+	void deleteDuplicates(); //删除重复元素
+private:
+	Node<T> *front; ? ?//头指针
+};
+template<class T>
+Linklist<T>::Linklist(T a[], int n)
+{
+	front = new Node<T>;
+	front->next = NULL;
+	for (int r = n - 1; r >= 0; r--)
+	{
+		Node<T>*s = new Node<T>;
+		s->data = a[r];
+		s->next = front->next;
+		front->next = s;
+	}
+}
+template<class T>
+Linklist<T>::~Linklist()
+{
+	Node<T>*p = front;
+	while (p)
+	{
+		front = p;
+		p = p->next;
+		delete front;
+	}
+}
+template<class T>
+void Linklist<T>::Printlist()
+{
+	Node<T>*p = front;
+	while (p->next != NULL)
+	{
+		p = p->next;
+		cout << p->data << " ";
+	}
+	cout << endl;
+}
+template<class T>
+void Linklist<T>::deleteDuplicates()
+{
+	Node <T>*p = front->next;
+	Node <T>*s = front->next;
+	int a = p->data, b = p->next;
+	while (s)
+	{
+		s = s->next;
+		while (p)
+		{
+			if (a == p->next->data)
+			{
+				p->next = p->next->next;
+				delete p->next;
+			}
+		}
+	}
+}
+template <class T>
+void Linklist<T>::decide()
+{
+	node <T>*p = front;
+	if (front->next == null)
+		cout << "empty" << endl;
+	else
+		L.Prinlist();
+}
+int main()
+{
+	int n;
+	cin >> n;
+	int *p = new int[n];
+	for (int i = i; i < n; i++)
+	{
+		cin >> p[i];
+	}
+	LinkList <int>L(p,n); //初始化单链表
+	L.deleteDuplicates();//删除单链表中的重复元素
+	L.decide();//
+	return 0;
+}
+滴盐水     错误57%
+#include<iostream>
+using namespace std;
+int main()
+{
+	int v, n=1,d;
+	cin >> v >> d;
+	while ((v - (n*(n + 1)*d / 2)) /(d*( n + 1)))
+	{
+		n++;
+	}
+	if (v%d == 0)
+
+	{
+		if (v - (n*(n + 1)*d / 2)==0)
+			cout << v / d + n - 1 << endl;
+		else
+			cout << v / d + n;
+	}
+	else
+	{
+		cout << v / d + n << endl;
+	}
+		
+	return 0;
+}
